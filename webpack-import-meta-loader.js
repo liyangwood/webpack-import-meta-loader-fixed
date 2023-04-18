@@ -15,6 +15,11 @@ const regex = /import\.meta/g;
  */
 module.exports = function (source) {
   const path = require('path');
+  
+  if(!this.rootContext) {
+    this.rootContext = this.options.context
+  }
+  var ctx = this.rootContext ? this.rootContext : this.options.context
 
   const relativePath = this.context.substring(
     this.context.indexOf(this.rootContext) + (this.rootContext && this.rootContext.length >= 0 ? (this.rootContext.length + 1) : 0),
